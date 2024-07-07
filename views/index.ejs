@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Posts</title>
+</head>
+<body>
+    <h1>X posts</h1>
+    <section class="posts">
+        <% for(post of posts){%>
+            <h3>&#64;<%- post.username %></h3>
+            <p><%- post.content %></p>
+        <% } %>
+    </section>
+</body>
+</html>
