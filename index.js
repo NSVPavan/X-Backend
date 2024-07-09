@@ -38,6 +38,7 @@ app.get('/posts/new',(req,res)=>{
 })
 
 app.post('/posts',(req,res)=>{
-    console.log(req.body);
-    res.send('Post request working');
+    let {username,content} = req.body;
+    posts.push({username,content});
+    res.send('Okkkk');
 })
