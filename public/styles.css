@@ -8,6 +8,9 @@ body{
     padding-top: 3rem;
 }
 header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: fixed;
     width: 100%;
     top: 0;
@@ -77,4 +80,14 @@ p{
 
 #create:hover {
     background-color: #1A91DA; /* Slightly darker blue for hover effect */
+}
+
+#new-post-page{
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+    margin-right: 30px;
+}
+#new-post-page:hover{
+    text-decoration: underline;
 }
