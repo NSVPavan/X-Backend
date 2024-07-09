@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>All Posts</title>
-</head>
-<body>
-    <h1>X posts</h1>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>X posts</header>
     <section class="posts">
-        <% for(post of posts){%>
-            <h3>&#64;<%- post.username %></h3>
-            <p><%- post.content %></p>
-        <% } %>
+      <% for(post of posts){%>
+      <div class="post">
+        <h3>&#64;<%- post.username %></h3>
+        <p><%- post.content %></p>
+      </div>
+      <% } %>
     </section>
-</body>
+  </body>
 </html>
