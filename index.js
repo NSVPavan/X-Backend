@@ -22,6 +22,8 @@ let posts=[
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,"views"));
 app.use(express.static(path.join(__dirname,"public")));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.listen(port,()=>{
     console.log(`Listening on port: ${port}`);
@@ -33,4 +35,9 @@ app.get('/posts',(req,res)=>{
 
 app.get('/posts/new',(req,res)=>{
     res.render('new.ejs');
+})
+
+app.post('/posts',(req,res)=>{
+    console.log(req.body);
+    res.send('Post request working');
 })

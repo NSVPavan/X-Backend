@@ -8,8 +8,8 @@
   </head>
   <body>
     <header>X posts</header>
-    <form class="new-post">
-        <input class="input-fields" type="text" id="username" placeholder="username" required>
+    <form class="new-post" action="/posts" method="post">
+        <input class="input-fields" type="text" name="username" id="username" placeholder="username" required>
         <textarea class="input-fields" name="content" id="content" rows="10" placeholder="Enter post content" required></textarea>
         <button type="submit" id="create">Create Post</button>
     </form>
