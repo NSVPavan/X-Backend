@@ -2,6 +2,7 @@ const exp = require('constants');
 const express = require('express');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
+const methodOverride = require('method-override');
 let app = express();
 
 const port = 3000;
@@ -28,6 +29,7 @@ app.set('views',path.join(__dirname,"views"));
 app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(methodOverride('_method'));
 
 app.listen(port,()=>{
     console.log(`Listening on port: ${port}`);
@@ -52,4 +54,16 @@ app.get('/posts/:id',(req,res)=>{
     let { id }=req.params;
     let post = posts.find((p)=>p.id===id);
     res.render('show.ejs',{post});
+});
+app.get('/posts/edit/:id',(req,res)=>{
+    let {id}=req.params;
+    let post = posts.find((p)=>p.id===id);
+    res.render('edit.ejs',{post});
+});
+app.patch('/posts/:id',(req,res)=>{
+    let {id}=req.params;
+    let post = posts.find((p)=>p.id===id);
+    let newContent = req.body.content;
+    post.content = newContent;
+    res.redirect('/posts');
 });

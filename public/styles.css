@@ -52,10 +52,22 @@ p{
     justify-content: center;
     align-items: center;
 }
+.edit-post{
+    margin-top: 120px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255,0.5);
+    width: 550px;
+    height: 550px;
+    justify-content: center;
+    align-items: center;
+}
 .input-fields{
     background-color: black;
     color: white;
     border-color: rgba(255, 255, 255,0.5);
+    border: none;
     font-size: 24px;
 }
 #content{
@@ -79,7 +91,17 @@ p{
     cursor: pointer;
     border: none; /* Remove border for a cleaner look */
 }
-
+#edit{
+    width: 150px;
+    height: 50px;
+    font-size: 16px;
+    border-radius: 10px;
+    background-color: #1DA1F2; /* Twitter blue */
+    color: white;
+    margin-top: 50px;
+    cursor: pointer;
+    border: none; /* Remove border for a cleaner look */
+}
 #create:hover {
     background-color: #1A91DA; /* Slightly darker blue for hover effect */
 }
@@ -93,10 +115,20 @@ p{
 #new-post-page:hover{
     text-decoration: underline;
 }
-.view-post{
+.link-container{
+    display: flex;
+    width: 100%;
     position: absolute;
     bottom: 0;
-    left: 30px;
+    justify-content: space-between;
+}
+.view-post-link{
+    color: #1A91DA;
+    text-decoration: none;
+    font-size: 24px;
+    padding-bottom: 10px;
+}
+.edit-post-link{
     color: #1A91DA;
     text-decoration: none;
     font-size: 24px;
