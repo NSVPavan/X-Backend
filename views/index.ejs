@@ -16,6 +16,9 @@
         <div class="link-container">
           <a class="view-post-link" href="http://localhost:3000/posts/<%-post.id%>">View Post</a>
           <a class="edit-post-link" href="http://localhost:3000/posts/edit/<%-post.id%>">Edit Post</a>
+          <form method="POST" action="/posts/<%- post.id %>/?_method=DELETE">
+            <button type="submit" class="delete-post-link">Delete Post</button>
+          </form>
         </div>
       </div>
       <% } %>
