@@ -12,10 +12,10 @@ import mysql from 'mysql2/promise';
 
 // Create the connection to database
 const connection = await mysql.createConnection({
-  host: 'localhost',
-  user: 'Delta Connection',
-  database: 'posts',
-  password: 'Password1!'
+    host: 'localhost',
+    user: 'Delta Connection',
+    database: 'posts',
+    password: 'Password1!'
 });
 // let posts=[
 //     {
