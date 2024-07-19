@@ -7,23 +7,33 @@ let app = express();
 
 const port = 3000;
 
-let posts=[
-    {
-        id: uuidv4(),
-        username: "Elon Musk",
-        content: "I own twitter now... Oh! I mean X"
-    },
-    {
-        id: uuidv4(),
-        username: "Elon Musk",
-        content: "It's me again. Now you can get verified just by paying"
-    },
-    {
-        id: uuidv4(),
-        username: "Mark Zuckerberg",
-        content: "We are launching threads!!"
-    }
-];
+// Get the client
+import mysql from 'mysql2/promise';
+
+// Create the connection to database
+const connection = await mysql.createConnection({
+  host: 'localhost',
+  user: 'Delta Connection',
+  database: 'posts',
+  password: 'Password1!'
+});
+// let posts=[
+//     {
+//         id: uuidv4(),
+//         username: "Elon Musk",
+//         content: "I own twitter now... Oh! I mean X"
+//     },
+//     {
+//         id: uuidv4(),
+//         username: "Elon Musk",
+//         content: "It's me again. Now you can get verified just by paying"
+//     },
+//     {
+//         id: uuidv4(),
+//         username: "Mark Zuckerberg",
+//         content: "We are launching threads!!"
+//     }
+// ];
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,"views"));
 app.use(express.static(path.join(__dirname,"public")));
