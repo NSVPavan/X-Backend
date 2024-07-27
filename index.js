@@ -48,7 +48,6 @@ app.listen(port,()=>{
 app.get('/posts',(req,res)=>{
     try{
         connection.query("SELECT * FROM post",(err,result)=>{
-            console.log(result);
             let posts = result;
             res.render("index.ejs",{posts});
         });
@@ -66,8 +65,18 @@ app.get('/posts/new',(req,res)=>{
 app.post('/posts',(req,res)=>{
     let {username,content} = req.body;
     let id = uuidv4();
-    posts.push({username,content,id});
-    res.redirect('/posts');
+    // posts.push({username,content,id});
+    let q = "INSERT INTO post (id,username,content) VALUES (?,?,?)";
+    let newpost = [id,username,content];
+    try{
+        connection.query(q,newpost,(err,result)=>{
+            console.log("Added new post!");
+            res.redirect('/posts');
+        })
+    }
+    catch(err){
+        res.send("Some error occured :(");
+    }
 });
 
 app.get('/posts/:id',(req,res)=>{
