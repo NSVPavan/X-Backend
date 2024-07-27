@@ -104,6 +104,14 @@ app.patch('/posts/:id',(req,res)=>{
 });
 app.delete('/posts/:id',(req,res)=>{
     let {id}=req.params;
-    posts=posts.filter((post)=>post.id!=id);
-    res.redirect('/posts');
+    let q = "DELETE FROM post WHERE id = ?";
+    try{
+        connection.query(q,id,(err,result)=>{
+            console.log("Post deleted successfully!");
+            res.redirect('/posts');
+        })
+    }
+    catch(err){
+        res.send("Some error occured :(");
+    }
 })
