@@ -81,8 +81,18 @@ app.post('/posts',(req,res)=>{
 
 app.get('/posts/:id',(req,res)=>{
     let { id }=req.params;
-    let post = posts.find((p)=>p.id===id);
-    res.render('show.ejs',{post});
+    // let post = posts.find((p)=>p.id===id);
+    let q = "SELECT * FROM post WHERE id = ?";
+    try{
+        connection.query(q,id,(err,result)=>{
+            console.log(result);
+            let post = result[0];
+            res.render('show.ejs',{post});
+        })
+    }
+    catch(err){
+        res.send("Some error occured :(");
+    }
 });
 app.get('/posts/edit/:id',(req,res)=>{
     let {id}=req.params;
