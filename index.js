@@ -17,23 +17,6 @@ const connection =mysql.createConnection({
     database: 'posts',
     password: 'Password1!'
 });
-// let posts=[
-//     {
-//         id: uuidv4(),
-//         username: "Elon Musk",
-//         content: "I own twitter now... Oh! I mean X"
-//     },
-//     {
-//         id: uuidv4(),
-//         username: "Elon Musk",
-//         content: "It's me again. Now you can get verified just by paying"
-//     },
-//     {
-//         id: uuidv4(),
-//         username: "Mark Zuckerberg",
-//         content: "We are launching threads!!"
-//     }
-// ];
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,"views"));
 app.use(express.static(path.join(__dirname,"public")));
@@ -65,7 +48,6 @@ app.get('/posts/new',(req,res)=>{
 app.post('/posts',(req,res)=>{
     let {username,content} = req.body;
     let id = uuidv4();
-    // posts.push({username,content,id});
     let q = "INSERT INTO post (id,username,content) VALUES (?,?,?)";
     let newpost = [id,username,content];
     try{
@@ -81,11 +63,9 @@ app.post('/posts',(req,res)=>{
 
 app.get('/posts/:id',(req,res)=>{
     let { id }=req.params;
-    // let post = posts.find((p)=>p.id===id);
     let q = "SELECT * FROM post WHERE id = ?";
     try{
         connection.query(q,id,(err,result)=>{
-            console.log(result);
             let post = result[0];
             res.render('show.ejs',{post});
         })
@@ -96,15 +76,31 @@ app.get('/posts/:id',(req,res)=>{
 });
 app.get('/posts/edit/:id',(req,res)=>{
     let {id}=req.params;
-    let post = posts.find((p)=>p.id===id);
-    res.render('edit.ejs',{post});
+    let q = "SELECT * FROM post WHERE id = ?";
+    try{
+        connection.query(q,id,(err,result)=>{
+            let post = result[0];
+            res.render('edit.ejs',{post});
+        })
+    }
+    catch(err){
+        res.send("Some error occured :(");
+    }
 });
 app.patch('/posts/:id',(req,res)=>{
     let {id}=req.params;
-    let post = posts.find((p)=>p.id===id);
     let newContent = req.body.content;
-    post.content = newContent;
-    res.redirect('/posts');
+    let q = "UPDATE post SET content = ? WHERE id = ?";
+    let details = [newContent,id];
+    try{
+        connection.query(q,details,(err,result)=>{
+            console.log("Edit successful!");
+            res.redirect('/posts');
+        })
+    }
+    catch(err){
+        res.send("Some error occured :(");
+    }
 });
 app.delete('/posts/:id',(req,res)=>{
     let {id}=req.params;
