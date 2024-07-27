@@ -8,12 +8,12 @@ let app = express();
 const port = 3000;
 
 // Get the client
-import mysql from 'mysql2/promise';
+const mysql = require('mysql2');
 
 // Create the connection to database
-const connection = await mysql.createConnection({
+const connection =mysql.createConnection({
     host: 'localhost',
-    user: 'Delta Connection',
+    user: 'root',
     database: 'posts',
     password: 'Password1!'
 });
@@ -46,7 +46,17 @@ app.listen(port,()=>{
 });
 
 app.get('/posts',(req,res)=>{
-    res.render('index.ejs',{posts});
+    try{
+        connection.query("SELECT * FROM post",(err,result)=>{
+            console.log(result);
+            let posts = result;
+            res.render("index.ejs",{posts});
+        });
+    }
+    catch(err){
+        console.log(err);
+        res.send('some error occurred :(');
+    }
 });
 
 app.get('/posts/new',(req,res)=>{
